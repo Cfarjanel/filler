@@ -14,7 +14,7 @@
 
 /*
 ** Vérifie le nombre d'étoiles en commun.
-** Dois faire la somme sur la map d'int en parralèle et ne garder que si 
+** Dois faire la somme sur la map d'int en parralèle et ne garder que si
 ** count == 1 et new < prev.
 */
 
@@ -34,16 +34,16 @@ int			ft_count(t_piece *piece, t_map *map, int i, int j, t_num *num)
         j = tmp;
    		while (y < piece->size.y && j < map->size.y)
    		{
-   			if (((map->shape[i][j] == 'o' || map->shape[i][j] == 'O') && num->player == 1)
-                       && piece->shape[x][y] == '*')
+            ft_putstr_fd("map : ", 2);
+            ft_putstr_fd(map->shape[i][j], 2);
+   			if (((map->shape[i][j] == 'o' || map->shape[i][j] == 'O') &&
+                    num->player == 1) && piece->shape[x][y] == '*')
             {
-   				count++;
+ 			    count++;
             }
-   			if (((map->shape[i][j] == 'x' || map->shape[i][j] == 'X') && num->player == 2)
-                       && piece->shape[x][y] == '*')
-            {
+   			if (((map->shape[i][j] == 'x' || map->shape[i][j] == 'X') &&
+                    num->player == 2) && piece->shape[x][y] == '*')
    				count++;
-            }
             j++;
    		    y++;
    		}
@@ -74,9 +74,15 @@ void        ft_somme(t_piece *piece, t_map *map, int x, int y)
 	{
 		y2 = y;
 		j = 0;
+
+
+        ft_putendl_fd("somme", 2);
 		while (j < piece->size.y && y < map->size.y)
 		{
-            piece->somme += map->numbers[x][y2];
+            if (piece->shape[i][j] == '*' && map->numbers[x][y2] > 2)
+            {
+               piece->somme += map->numbers[x][y2];
+            }
 			j++;
 			y2++;
 		}
@@ -105,9 +111,11 @@ int         place(t_piece *piece, t_map *map, t_num *num)
         {
             if (ft_count(piece, map, x, y, num) == 1)
             {
+                ft_putendl_fd("test 3", 2);
                 ft_somme(piece, map, x, y);
                 if (piece->somme < piece->prev || piece->prev == 0)
                 {
+                    ft_putendl_fd("test 4", 2);
                     piece->prev = piece->somme;
                     piece->coord.x = x;
                     piece->coord.y = y;

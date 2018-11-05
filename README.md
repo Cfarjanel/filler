@@ -1,8 +1,6 @@
 # DOING (!)
 
-- tester conditions count & somme
-
- - ft_count pour une étoile en commun et la somme des cases de map->numbers
+- coord de count & somme n'avancent pas correctement
 
 # TO-DO (x)
 
@@ -11,6 +9,7 @@
 
 # DONE (✓)
 
+- ft_count pour une étoile en commun et la somme des cases de map->numbers
 - transformation de map->shape en map->numbers
 - parsing piece, map && number player
 

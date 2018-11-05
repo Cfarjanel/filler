@@ -70,14 +70,7 @@ int			main(void)
 		size_piece(&piece);
 		get_piece(&piece);
 		diffusion(&map, &num);
-		// if (place(&piece, &map, &num) == 1)
-		// {
 		place(&piece, &map, &num);
-		ft_putendl_fd("test 6", 2);
-		// ft_printf("%d %d\n", piece.coord.x, piece.coord.y);
-			ft_print_coords(&piece);
-			// break ;
-		// }
 	}
 	return (0);
 }
