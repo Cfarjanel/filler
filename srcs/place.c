@@ -14,17 +14,18 @@
 
 /*
 ** Vérifie le nombre d'étoiles en commun.
-** Dois faire la somme sur la map d'int en parralèle et ne garder que si count == 1
-** et new < prev.
+** Dois faire la somme sur la map d'int en parralèle et ne garder que si 
+** count == 1 et new < prev.
 */
 
-void			ft_count(t_piece *piece, t_map *map, int i, int j, t_num *num)
+int			ft_count(t_piece *piece, t_map *map, int i, int j, t_num *num)
 {
 	int x;
 	int y;
     int tmp;
+    int count;
 
-	piece->count = 0;
+	count = 0;
 	x = 0;
     tmp = j;
     while (x < piece->size.x && i < map->size.x)
@@ -36,12 +37,12 @@ void			ft_count(t_piece *piece, t_map *map, int i, int j, t_num *num)
    			if (((map->shape[i][j] == 'o' || map->shape[i][j] == 'O') && num->player == 1)
                        && piece->shape[x][y] == '*')
             {
-   				piece->count++;
+   				count++;
             }
    			if (((map->shape[i][j] == 'x' || map->shape[i][j] == 'X') && num->player == 2)
                        && piece->shape[x][y] == '*')
             {
-   				piece->count++;
+   				count++;
             }
             j++;
    		    y++;
@@ -49,6 +50,9 @@ void			ft_count(t_piece *piece, t_map *map, int i, int j, t_num *num)
         i++;
         x++;
     }
+    if (count == 1)
+        return (1);
+    return (0);
 }
 
 /*
@@ -99,8 +103,7 @@ int         place(t_piece *piece, t_map *map, t_num *num)
         y = 0;
         while (y < map->size.y)
         {
-            ft_count(piece, map, x, y, num);
-            if (piece->count == 1)
+            if (ft_count(piece, map, x, y, num) == 1)
             {
                 ft_somme(piece, map, x, y);
                 if (piece->somme < piece->prev || piece->prev == 0)
