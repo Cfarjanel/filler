@@ -33,26 +33,10 @@ void		ft_print_coords(t_piece *piece)
 
 void		diffusion(t_map *map, t_num *num)
 {
-	// int x;
-	// int y;
-
-	// x = 0;
 	right(map, num);
 	up(map);
 	left(map);
 	down(map);
-	// while (x < map->size.x)
-	// {
-	// 	y = 0;
-	// 	while (y < map->size.y)
-	// 	{
-	// 		ft_putnbr_fd(map->numbers[x][y], 2);
-	// 		ft_putstr_fd("  ", 2);
-	// 		y++;
-	// 	}
-	// 	ft_putstr_fd("\n", 2);
-	// 	x++;
-	// }
 }
 
 int			main(void)
@@ -60,6 +44,7 @@ int			main(void)
 	t_piece	piece;
 	t_map	map;
 	t_num	num;
+	int i = 0;
 
 	init(&map, &piece, &num);
 	players(&num);
@@ -71,6 +56,10 @@ int			main(void)
 		get_piece(&piece);
 		diffusion(&map, &num);
 		place(&piece, &map, &num);
+		free_double_tab((void**)piece.shape, piece.size.x);
+		free_double_tab((void**)map.shape, map.size.x);
+		free_double_tab((void**)map.numbers, map.size.x);
+		i++;
 	}
 	return (0);
 }

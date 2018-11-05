@@ -91,13 +91,6 @@ int         place(t_piece *piece, t_map *map, t_num *num)
     int y;
 
     x = 0;
-    // ft_putendl_fd("test 1", 2);
-    //     int z = 0;
-    // while (z < piece->size.x)
-    // {
-    // 	ft_putendl_fd(piece->shape[z], 2);
-    // 	z++;
-    // }
     piece->prev = 0;
     piece->coord.x = 0;
     piece->coord.y = 0;
@@ -114,7 +107,6 @@ int         place(t_piece *piece, t_map *map, t_num *num)
                     piece->prev = piece->somme;
                     piece->coord.x = x;
                     piece->coord.y = y;
-                // dprintf(2, "%d %d pute\n", x, y);
                 }
             }
             y++;

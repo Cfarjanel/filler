@@ -46,11 +46,10 @@ typedef struct		s_piece
 {
 	t_coord			size;
 	t_coord			coord;
-	char			**shape;
 	int				count;
 	int				prev;
-	int				ret;
 	int				somme;
+	char			**shape;
 }					t_piece;
 
 /*

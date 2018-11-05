@@ -16,22 +16,22 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	@echo "$(GREEN)[✓]$(NC)$(CL) Objects of libft compiled$(NC)"
+	@echo "$(GREEN)✓$(NC)$(CL) Objects of libft compiled$(NC)"
 	@gcc -o $(NAME) $(FLAGS) $(OBJ) libft/libft.a
-	@echo "$(GREEN)[✓]$(NC)$(CL) Executable $(NAME) built$(NC)"
+	@echo "$(GREEN)✓$(NC)$(CL) Executable $(NAME) built$(NC)"
 
 %.o: %.c
 	@$(CC) -c $(FLAGS) $< -o $@
 
 clean:
 	@make clean -C libft
-	@echo "$(RED)[-]$(NC)$(CL2) Objects of libft cleaned$(NC)"
+	@echo "$(RED)x$(NC)$(CL2) Objects of libft cleaned$(NC)"
 	@rm -f $(OBJ)
-	@echo "$(RED)[-]$(NC)$(CL2) Objects of $(NAME) cleaned$(NC)"
+	@echo "$(RED)x$(NC)$(CL2) Objects of $(NAME) cleaned$(NC)"
 
 fclean: clean
 	@make fclean -C libft
 	@rm -f $(NAME)
-	@echo "$(RED)[-]$(NC)$(CL2) Executable $(NAME) cleaned$(NC)"
+	@echo "$(RED)x$(NC)$(CL2) Executable $(NAME) cleaned$(NC)"
 
 re: fclean all

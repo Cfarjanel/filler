@@ -27,6 +27,7 @@ void		players(t_num *number)
 		number->bot = 2;
 	else
 		number->bot = 1;
+	free(line);
 }
 
 /*
@@ -37,10 +38,12 @@ void			size_map(t_map *map)
 {
 	char	*line;
 
-	line = NULL;
 	get_next_line(0, &line);
-	if (!line)
+	if (!line) {
+		free(line);
+		// while(1);
 		exit (1);
+	}
 	if (ft_strstr(line, "Plateau ") && *line)
 	{
 		while (!ft_isdigit(*line))
@@ -54,7 +57,9 @@ void			size_map(t_map *map)
 		while (ft_isdigit(*line))
 			line++;
 	}
+	free(line);
 	get_next_line(0, &line);
+	free(line);
 }
 
 /*
@@ -85,6 +90,7 @@ void		get_map(t_map *map)
 		if (!(map->numbers[i] = ft_memalloc(sizeof(int) * (map->size.y))))
 			return ;
 		i++;
+		free(line);
 	}
 }
 
@@ -95,24 +101,27 @@ void		get_map(t_map *map)
 void			size_piece(t_piece *piece)
 {
 	char	*line;
+	int i;
 
+	i = 0;
 	line = NULL;
 	get_next_line(0, &line);
 	if (!line)
 		exit (1);
 	if (ft_strstr(line, "Piece ") && line)
 	{
-		while (!ft_isdigit(*line) && line)
-			line++;
-		piece->size.x = ft_atoi(line);
-		while (ft_isdigit(*line) && line)
-			line++;
-		while (!ft_isdigit(*line) && line)
-			line++;
-		piece->size.y = ft_atoi(line);
-		while (ft_isdigit(*line) && line)
-			line++;
+		while (!ft_isdigit(line[i]) && &(line[i]))
+			i++;
+		piece->size.x = ft_atoi(&(line[i]));
+		while (ft_isdigit(line[i]) && &(line[i]))
+			i++;
+		while (!ft_isdigit(line[i]) && &(line[i]))
+			i++;
+		piece->size.y = ft_atoi(&(line[i]));
+		while (ft_isdigit(line[i]) && &(line[i]))
+			i++;
 	}
+	free(line);
 }
 
 /*
@@ -136,4 +145,5 @@ void		get_piece(t_piece *piece)
 		piece->shape[i] = line;
 		i++;
 	}
+	free(line);
 }

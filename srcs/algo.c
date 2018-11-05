@@ -20,14 +20,6 @@ int			ft_isbot(t_map *m, t_num *n, int x, int y)
 	return (0);
 }
 
-int			ft_isplayer(t_map *m, t_num *n, int x, int y)
-{
-	if (((m->shape[x][y] == 'o' || m->shape[x][y] == 'O') && n->player == 1) ||
-	((m->shape[x][y] == 'x' || m->shape[x][y] == 'X') && n->player == 2))
-		return (1);
-	return (0);
-}
-
 void		right(t_map *map, t_num *num)
 {
 	int x;
