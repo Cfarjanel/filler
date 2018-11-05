@@ -19,7 +19,7 @@ static void	init(t_map *map, t_piece *piece, t_num *number)
 	ft_bzero(number, sizeof(*number));
 }
 
-void		ft_print_result(t_piece *piece)
+void		ft_print_coords(t_piece *piece)
 {
 	ft_putnbr(piece->coord.x);
 	ft_putstr(" ");
@@ -27,32 +27,30 @@ void		ft_print_result(t_piece *piece)
 	ft_putstr("\n");
 }
 
-void			ft_count(t_piece *piece, t_map *map)
+/*
+** Crée la map de chaleur autour de l'ennemi.
+*/
+
+void		diffusion(t_map *map, t_num *num)
 {
 	int x;
 	int y;
-	int i;
-	int j;
 
-	i = piece->coord.x;
-	piece->count = 0;
 	x = 0;
-	while (x < piece->size.x && i < map->size.x)
+	right(map, num);
+	up(map);
+	left(map);
+	down(map);
+	while (x < map->size.x)
 	{
-		j = piece->coord.y;
 		y = 0;
-		while (y < piece->size.y && j < map->size.y)
+		while (y < map->size.y)
 		{
-			if ((map->shape[i][j] == 'o' || map->shape[i][j] == 'O') &&
-					piece->shape[x][y] == '*')
-				piece->count++;
-			if ((map->shape[i][j] == 'x' || map->shape[i][j] == 'X') &&
-					piece->shape[x][y] == '*')
-				piece->count++;
-			j++;
+			ft_putnbr_fd(map->numbers[x][y], 2);
+			ft_putstr_fd("  ", 2);
 			y++;
 		}
-		i++;
+		ft_putstr_fd("\n", 2);
 		x++;
 	}
 }
@@ -65,10 +63,21 @@ int			main(void)
 
 	init(&map, &piece, &num);
 	players(&num);
-	size_map(&map);
-	get_map(&map);
-	size_piece(&piece);
-	get_piece(&piece);
-	diffusion(&map, &num);
+	while (1)
+	{
+		size_map(&map);
+		get_map(&map);
+		size_piece(&piece);
+		get_piece(&piece);
+		diffusion(&map, &num);
+		// if (place(&piece, &map, &num) == 1)
+		// {
+		place(&piece, &map, &num);
+		ft_putendl_fd("test 6", 2);
+		// ft_printf("%d %d\n", piece.coord.x, piece.coord.y);
+			ft_print_coords(&piece);
+			// break ;
+		// }
+	}
 	return (0);
 }

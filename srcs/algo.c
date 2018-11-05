@@ -12,7 +12,7 @@
 
 #include "../includes/filler.h"
 
-static int		bot(t_map *m, t_num *n, int x, int y)
+int			ft_isbot(t_map *m, t_num *n, int x, int y)
 {
 	if (((m->shape[x][y] == 'o' || m->shape[x][y] == 'O') && n->bot == 1) ||
 	((m->shape[x][y] == 'x' || m->shape[x][y] == 'X') && n->bot == 2))
@@ -20,11 +20,13 @@ static int		bot(t_map *m, t_num *n, int x, int y)
 	return (0);
 }
 
-/*
-** Parse tous les sens de la map char et cherche count == 1.
-** Si count == 1, cherche l'équivalent sur la map int pour récupérer la distance
-** correspondante et la stocker si elle est inférieure à la précédente.
-*/
+int			ft_isplayer(t_map *m, t_num *n, int x, int y)
+{
+	if (((m->shape[x][y] == 'o' || m->shape[x][y] == 'O') && n->player == 1) ||
+	((m->shape[x][y] == 'x' || m->shape[x][y] == 'X') && n->player == 2))
+		return (1);
+	return (0);
+}
 
 void		right(t_map *map, t_num *num)
 {
@@ -37,7 +39,7 @@ void		right(t_map *map, t_num *num)
 		y = 0;
 		while (y < map->size.y)
 		{
-			if (bot(map, num, x, y) == 1)
+			if (ft_isbot(map, num, x, y) == 1)
 				map->numbers[x][y] = 1;
 			if (map->numbers[x][y] != 0) 
 			{
@@ -114,27 +116,4 @@ void		down(t_map *map)
 		}
 		y++;
 	}
-}
-
-void		diffusion(t_map *map, t_num *num)
-{
-	int x;
-	int y;
-
-	x = 0;
-	right(map, num);
-	up(map);
-	left(map);
-	down(map);
-	// while (x < map->size.x)
-	// {
-	// 	y = 0;
-	// 	while (y < map->size.y)
-	// 	{
-	// 		ft_putnbr_fd(map->numbers[x][y], 2);
-	// 		ft_putstr_fd("  ", 2);
-	// 		y++;
-	// 	}
-	// 	x++;
-	// }
 }

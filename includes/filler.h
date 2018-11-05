@@ -26,12 +26,6 @@ typedef struct		s_num
 	int				bot;
 }					t_num;
 
-typedef struct		s_players
-{
-	t_coord			player;
-	t_coord			bot;
-}					t_players;
-
 /*
 ** info map : taille, start, dernière pièce posée
 */
@@ -54,24 +48,34 @@ typedef struct		s_piece
 	t_coord			coord;
 	char			**shape;
 	int				count;
+	int				prev;
+	int				ret;
+	int				somme;
 }					t_piece;
 
 /*
 ** parsing
 */
 
-void			size_piece(t_piece *piece);
-void			get_piece(t_piece *piece);
-void			get_map(t_map *map);
-void			size_map(t_map *map);
-void			players(t_num *number);
+void				size_piece(t_piece *piece);
+void				get_piece(t_piece *piece);
+void				get_map(t_map *map);
+void				size_map(t_map *map);
+void				players(t_num *number);
+int					ft_isplayer(t_map *m, t_num *n, int x, int y);
+int					ft_isbot(t_map *m, t_num *n, int x, int y);
 
 /*
 ** algo
 */
 
-void			diffusion(t_map *map, t_num *num);
-void			ft_count(t_piece *piece, t_map *map);
-void			ft_print_result(t_piece *piece);
+void				right(t_map *map, t_num *num);
+void				up(t_map *map);
+void				left(t_map *map);
+void				down(t_map *map);
+void				diffusion(t_map *map, t_num *num);
+void				ft_count(t_piece *piece, t_map *map, int x, int y, t_num *num);
+void				ft_print_coords(t_piece *piece);
+int         		place(t_piece *piece, t_map *map, t_num *num);
 
 #endif

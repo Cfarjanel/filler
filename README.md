@@ -1,61 +1,20 @@
 # DOING (!)
 
-- closest
-- Ligne droite (okay ?)
+- tester conditions count & somme
+
+ - ft_count pour une étoile en commun et la somme des cases de map->numbers
 
 # TO-DO (x)
 
-- get_next
+- parcours la map à la recherche de count == 1, récupère ret pour le stocker dans
+	prev si ret < prev. À la fin de la boucle, set coord = prev.coord;
 
 # DONE (✓)
 
-- count_zero
-- segfault sur reshape avec count_one/zero
-- reshape
-- ne replace pas si count > 1 (sauf reshape)
-- si piece = ...\n.** -> ne prend pas en compte le décalage de la deuxième ligne
+- transformation de map->shape en map->numbers
+- parsing piece, map && number player
 
-vérifier toutes les structures et renommer/supprimer si besoin ✓
-- tools.c ✓
-	- get_map ✓
-	- get_shape ✓
-	- get_parse ✓
-	- out_of_map ✓
-	- ft_print_result ✓
-
-- parsing.c ✓
-	- get_parse OKAY ✓
-	- start OKAY ✓
-	- filler OKAY ✓
-	- parse_map OKAY ✓
-	- get_map OKAY ✓
-	- parse_piece OKAY ✓
-	- get_shape OKAY ✓
-
-- algo.c ✓
-	- reshape OKAY ✓
-	- ft_is_okay OKAY ✓
-
-- closest_piece.c X
-	- get_next ✓ 
-	- closest_piece X
-
-- filler.c ✓
-	- init ✓
-	- filler ✓
-	- main ✓
-<!-- trying_piece -> brouillon.c -->
-<!-- int trying_piece(t_piece *piece, t_map *map, t_num *number); -->
-<!-- if (trying_piece(&piece, &map, &num) == 1) -->
-
--------------------------------------------------------------------------------
-
-if close.player - close.bot > 0
-	coord -= 1;
-if close.player - close.bot < 0
-	coord += 1;
-
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 # TESTS
 

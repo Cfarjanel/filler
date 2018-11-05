@@ -1,6 +1,6 @@
 NAME = resources/players/cfarjane.filler
 
-SRCS = srcs/filler.c srcs/parsing.c srcs/algo.c
+SRCS = srcs/filler.c srcs/parsing.c srcs/algo.c srcs/place.c
 
 FLAGS = -Wall -Werror -Wextra -I./includes -ggdb
 
