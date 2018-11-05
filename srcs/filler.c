@@ -33,26 +33,26 @@ void		ft_print_coords(t_piece *piece)
 
 void		diffusion(t_map *map, t_num *num)
 {
-	int x;
-	int y;
+	// int x;
+	// int y;
 
-	x = 0;
+	// x = 0;
 	right(map, num);
 	up(map);
 	left(map);
 	down(map);
-	while (x < map->size.x)
-	{
-		y = 0;
-		while (y < map->size.y)
-		{
-			ft_putnbr_fd(map->numbers[x][y], 2);
-			ft_putstr_fd("  ", 2);
-			y++;
-		}
-		ft_putstr_fd("\n", 2);
-		x++;
-	}
+	// while (x < map->size.x)
+	// {
+	// 	y = 0;
+	// 	while (y < map->size.y)
+	// 	{
+	// 		ft_putnbr_fd(map->numbers[x][y], 2);
+	// 		ft_putstr_fd("  ", 2);
+	// 		y++;
+	// 	}
+	// 	ft_putstr_fd("\n", 2);
+	// 	x++;
+	// }
 }
 
 int			main(void)

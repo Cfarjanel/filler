@@ -18,36 +18,29 @@
 ** count == 1 et new < prev.
 */
 
-int			ft_count(t_piece *piece, t_map *map, int i, int j, t_num *num)
+static int			ft_count(t_piece *piece, t_map *map, int i, int j, t_num *num)
 {
 	int x;
 	int y;
-    int tmp;
     int count;
 
 	count = 0;
 	x = 0;
-    tmp = j;
-    while (x < piece->size.x && i < map->size.x)
+    while (x < piece->size.x)
     {
         y = 0;
-        j = tmp;
-   		while (y < piece->size.y && j < map->size.y)
+   		while (y < piece->size.y)
    		{
-            ft_putstr_fd("map : ", 2);
-            ft_putstr_fd(map->shape[i][j], 2);
-   			if (((map->shape[i][j] == 'o' || map->shape[i][j] == 'O') &&
-                    num->player == 1) && piece->shape[x][y] == '*')
-            {
+            if(j + y >= map->size.y || i + x >= map->size.x || (map->numbers[i + x][j + y] <= 2 && piece->shape[x][y] == '*') ) 
+                return (0);    
+   			if (((map->shape[i + x][j + y] == 'o' || map->shape[i + x][j + y] == 'O') &&
+                    num->player == 1) && piece->shape[x][y] == '*') 
  			    count++;
-            }
-   			if (((map->shape[i][j] == 'x' || map->shape[i][j] == 'X') &&
+   			if (((map->shape[i + x][j + y] == 'x' || map->shape[i + x][j + y] == 'X') &&
                     num->player == 2) && piece->shape[x][y] == '*')
    				count++;
-            j++;
    		    y++;
    		}
-        i++;
         x++;
     }
     if (count == 1)
@@ -62,7 +55,7 @@ int			ft_count(t_piece *piece, t_map *map, int i, int j, t_num *num)
 ** Cette somme est stockée et réutilisée par place pour définir si la position de la pièce est la plus adaptée.
 */
 
-void        ft_somme(t_piece *piece, t_map *map, int x, int y)
+static void        ft_somme(t_piece *piece, t_map *map, int x, int y)
 {
 	int i;
 	int j;
@@ -74,15 +67,10 @@ void        ft_somme(t_piece *piece, t_map *map, int x, int y)
 	{
 		y2 = y;
 		j = 0;
-
-
-        ft_putendl_fd("somme", 2);
 		while (j < piece->size.y && y < map->size.y)
 		{
             if (piece->shape[i][j] == '*' && map->numbers[x][y2] > 2)
-            {
                piece->somme += map->numbers[x][y2];
-            }
 			j++;
 			y2++;
 		}
@@ -103,7 +91,16 @@ int         place(t_piece *piece, t_map *map, t_num *num)
     int y;
 
     x = 0;
-    ft_putendl_fd("test 1", 2);
+    // ft_putendl_fd("test 1", 2);
+    //     int z = 0;
+    // while (z < piece->size.x)
+    // {
+    // 	ft_putendl_fd(piece->shape[z], 2);
+    // 	z++;
+    // }
+    piece->prev = 0;
+    piece->coord.x = 0;
+    piece->coord.y = 0;
     while (x < map->size.x)
     {
         y = 0;
@@ -111,14 +108,13 @@ int         place(t_piece *piece, t_map *map, t_num *num)
         {
             if (ft_count(piece, map, x, y, num) == 1)
             {
-                ft_putendl_fd("test 3", 2);
                 ft_somme(piece, map, x, y);
                 if (piece->somme < piece->prev || piece->prev == 0)
                 {
-                    ft_putendl_fd("test 4", 2);
                     piece->prev = piece->somme;
                     piece->coord.x = x;
                     piece->coord.y = y;
+                // dprintf(2, "%d %d pute\n", x, y);
                 }
             }
             y++;
