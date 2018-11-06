@@ -44,7 +44,6 @@ int			main(void)
 	t_piece	piece;
 	t_map	map;
 	t_num	num;
-	int i = 0;
 
 	init(&map, &piece, &num);
 	players(&num);
@@ -59,7 +58,7 @@ int			main(void)
 		free_double_tab((void**)piece.shape, piece.size.x);
 		free_double_tab((void**)map.shape, map.size.x);
 		free_double_tab((void**)map.numbers, map.size.x);
-		i++;
+		// while (1);
 	}
 	return (0);
 }

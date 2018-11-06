@@ -21,6 +21,8 @@ void		players(t_num *number)
 	char		*line;
 
 	get_next_line(0, &line);
+	if (!line)
+		return ;
 	if (ft_strstr(line, "cfarjane.filler"))
 		number->player = ft_atoi(&line[10]);
 	if (number->player == 1)
@@ -37,25 +39,28 @@ void		players(t_num *number)
 void			size_map(t_map *map)
 {
 	char	*line;
+	int i;
 
+	i = 0;
+	line = NULL;
 	get_next_line(0, &line);
 	if (!line) {
-		free(line);
 		// while(1);
+		// ft_putstr("pute");
 		exit (1);
 	}
-	if (ft_strstr(line, "Plateau ") && *line)
+	if (ft_strstr(line, "Plateau "))
 	{
-		while (!ft_isdigit(*line))
-			line++;
-		map->size.x = ft_atoi(line);
-		while (ft_isdigit(*line))
-			line++;
-		while (!ft_isdigit(*line))
-			line++;
-		map->size.y = ft_atoi(line);
-		while (ft_isdigit(*line))
-			line++;
+		while (!ft_isdigit(line[i]) && line[i])
+			i++;
+		map->size.x = ft_atoi(line + i);
+		while (ft_isdigit(line[i]))
+			i++;
+		while (!ft_isdigit(line[i]) && line[i])
+			i++;
+		map->size.y = ft_atoi(line + i);
+		while (ft_isdigit(line[i]))
+			i++;
 	}
 	free(line);
 	get_next_line(0, &line);
@@ -81,7 +86,10 @@ void		get_map(t_map *map)
 	{
 		get_next_line(0, &line);
 		if (!line)
+		{
+			while(1);
 			exit (1);
+		}
 		j = 0;
 		while ((ft_isdigit(line[j]) || line[j] == ' ') && line[j])
 			j++;
@@ -108,7 +116,7 @@ void			size_piece(t_piece *piece)
 	get_next_line(0, &line);
 	if (!line)
 		exit (1);
-	if (ft_strstr(line, "Piece ") && line)
+	if (ft_strstr(line, "Piece "))
 	{
 		while (!ft_isdigit(line[i]) && &(line[i]))
 			i++;
