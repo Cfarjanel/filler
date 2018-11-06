@@ -43,7 +43,11 @@ void			size_map(t_map *map)
 
 	i = 0;
 	line = NULL;
-	get_next_line(0, &line);
+	while (!line || !*line)
+	{
+		get_next_line(0, &line);
+		dprintf(2, "1 %s\n", line);
+	}
 	if (!line)
 		exit (1);
 	if (ft_strstr(line, "Plateau "))
@@ -61,6 +65,7 @@ void			size_map(t_map *map)
 	}
 	ft_strdel(&line);
 	get_next_line(0, &line);
+		dprintf(2, "2 %s\n", line);
 	free(line);
 }
 
@@ -75,13 +80,18 @@ void		get_map(t_map *map)
 
 	i = 0;
 	line = NULL;
+	if (!(map->shape))
 	if (!(map->shape = ft_memalloc(sizeof(char*) * (map->size.x))))
 		return ;
+	if (!(map->numbers))
 	if (!(map->numbers = ft_memalloc(sizeof(int*) * (map->size.x))))
 		return ;
 	while (i < map->size.x)
 	{
 		get_next_line(0, &line);
+		// dprintf(2, "+ %s\n", line);
+		dprintf(2, "* %s\n", line);
+
 		if (!line)
 			ft_putendl("exit (1);");
 		j = 0;
@@ -90,7 +100,8 @@ void		get_map(t_map *map)
 		if (!(map->shape[i] = ft_strdup(line + j)))
 			return ;
 		if (!(map->numbers[i] = ft_memalloc(sizeof(int) * (map->size.y))))
-			return ;
+			exit(1) ;
+		// dprintf(2, "- %s - %d\n", map->shape[i], map->size.y);
 		i++;
 		ft_strdel(&line);
 	}
@@ -108,6 +119,7 @@ void			size_piece(t_piece *piece)
 	i = 0;
 	line = NULL;
 	get_next_line(0, &line);
+		dprintf(2, "s %s\n", line);
 	if (!line)
 		exit (1);
 	if (ft_strstr(line, "Piece "))
@@ -142,10 +154,14 @@ void		get_piece(t_piece *piece)
 	while (i < piece->size.x)
 	{
 		get_next_line(0, &line);
+		dprintf(2, "g %s\n", line);
+
 		if (!line)
 			exit (1);
 		piece->shape[i] = line;
+		// dprintf(2, "{ %s\n", piece->shape[i]);
 		i++;
+		line = NULL;
 	}
 	// free(line);
 }
