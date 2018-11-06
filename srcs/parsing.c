@@ -44,11 +44,8 @@ void			size_map(t_map *map)
 	i = 0;
 	line = NULL;
 	get_next_line(0, &line);
-	if (!line) {
-		// while(1);
-		// ft_putstr("pute");
+	if (!line)
 		exit (1);
-	}
 	if (ft_strstr(line, "Plateau "))
 	{
 		while (!ft_isdigit(line[i]) && line[i])
@@ -62,7 +59,7 @@ void			size_map(t_map *map)
 		while (ft_isdigit(line[i]))
 			i++;
 	}
-	free(line);
+	ft_strdel(&line);
 	get_next_line(0, &line);
 	free(line);
 }
@@ -86,10 +83,7 @@ void		get_map(t_map *map)
 	{
 		get_next_line(0, &line);
 		if (!line)
-		{
-			while(1);
-			exit (1);
-		}
+			ft_putendl("exit (1);");
 		j = 0;
 		while ((ft_isdigit(line[j]) || line[j] == ' ') && line[j])
 			j++;
@@ -98,7 +92,7 @@ void		get_map(t_map *map)
 		if (!(map->numbers[i] = ft_memalloc(sizeof(int) * (map->size.y))))
 			return ;
 		i++;
-		free(line);
+		ft_strdel(&line);
 	}
 }
 
@@ -153,5 +147,5 @@ void		get_piece(t_piece *piece)
 		piece->shape[i] = line;
 		i++;
 	}
-	free(line);
+	// free(line);
 }

@@ -10,6 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <execinfo.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 #include "../includes/filler.h"
 
 static void	init(t_map *map, t_piece *piece, t_num *number)
@@ -39,12 +45,25 @@ void		diffusion(t_map *map, t_num *num)
 	down(map);
 }
 
+// ENLEVE MOI :)
+void handler(int sig) {
+	void *array[10];
+	size_t size;
+
+	size = backtrace(array, 10);
+	fprintf(stderr, "Error: signal %d:\n", sig);
+	backtrace_symbols_fd(array, size, STDERR_FILENO);
+	exit(1);
+}
+
 int			main(void)
 {
 	t_piece	piece;
 	t_map	map;
 	t_num	num;
 
+	// ENLEVE MOI
+	signal(SIGSEGV, handler);
 	init(&map, &piece, &num);
 	players(&num);
 	while (1)
@@ -55,10 +74,13 @@ int			main(void)
 		get_piece(&piece);
 		diffusion(&map, &num);
 		place(&piece, &map, &num);
+		ft_putendl_fd("un", 2);
 		free_double_tab((void**)piece.shape, piece.size.x);
+		ft_putendl_fd("deux", 2);
 		free_double_tab((void**)map.shape, map.size.x);
+		ft_putendl_fd("trois", 2);
 		free_double_tab((void**)map.numbers, map.size.x);
-		// while (1);
+		ft_putendl_fd("quatre", 2);
 	}
 	return (0);
 }
