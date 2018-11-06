@@ -16,13 +16,13 @@
 ** Défini J1 et J2.
 */
 
-void		players(t_num *number)
+void			players(t_num *number)
 {
 	char		*line;
 
 	get_next_line(0, &line);
 	if (!line)
-		exit (1);
+		exit(1);
 	if (ft_strstr(line, "cfarjane.filler"))
 		number->player = ft_atoi(&line[10]);
 	if (number->player == 1)
@@ -39,13 +39,12 @@ void		players(t_num *number)
 void			size_map(t_map *map, t_piece *piece)
 {
 	char	*line;
-	int i;
+	int		i;
 
 	i = 0;
 	line = NULL;
 	get_next_line(0, &line);
-	if (!line)
-		ft_exito(piece, map);
+	(!line) ? ft_exito(piece, map) : 0;
 	if (ft_strstr(line, "Plateau "))
 	{
 		while (!ft_isdigit(line[i]) && line[i])
@@ -61,15 +60,16 @@ void			size_map(t_map *map, t_piece *piece)
 	}
 	ft_strdel(&line);
 	get_next_line(0, &line);
-		if (!line)
-			ft_exito(piece, map);
+	if (!line)
+		ft_exito(piece, map);
 	free(line);
 }
 
 /*
 ** Récupération forme map.
 */
-void		get_map(t_map *map, t_piece *piece)
+
+void			get_map(t_map *map, t_piece *piece)
 {
 	char	*line;
 	int		i;
@@ -101,17 +101,17 @@ void		get_map(t_map *map, t_piece *piece)
 /*
 ** Taille pièce.
 */
-  
+
 void			size_piece(t_piece *piece, t_map *map)
 {
 	char	*line;
-	int i;
+	int		i;
 
 	i = 0;
 	line = NULL;
 	get_next_line(0, &line);
-		if (!line)
-			ft_exito(piece, map);
+	if (!line)
+		ft_exito(piece, map);
 	if (ft_strstr(line, "Piece "))
 	{
 		while (!ft_isdigit(line[i]) && &(line[i]))
@@ -132,7 +132,7 @@ void			size_piece(t_piece *piece, t_map *map)
 ** Récupération forme pièce.
 */
 
-void		get_piece(t_piece *piece, t_map *map)
+void			get_piece(t_piece *piece, t_map *map)
 {
 	char	*line;
 	int		i;
@@ -149,5 +149,4 @@ void		get_piece(t_piece *piece, t_map *map)
 		piece->shape[i] = line;
 		i++;
 	}
-	// free(line);
 }

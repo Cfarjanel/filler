@@ -33,7 +33,7 @@ void		right(t_map *map, t_num *num)
 		{
 			if (ft_isbot(map, num, x, y) == 1)
 				map->numbers[x][y] = 1;
-			if (map->numbers[x][y] != 0) 
+			if (map->numbers[x][y] != 0)
 			{
 				if (y + 1 < map->size.y && map->numbers[x][y + 1] == 0)
 					map->numbers[x][y + 1] = map->numbers[x][y] + 1;
@@ -74,7 +74,7 @@ void		left(t_map *map)
 	x = map->size.x - 1;
 	while (x >= 0)
 	{
-		y = map->size.y - 1;	
+		y = map->size.y - 1;
 		while (y >= 0)
 		{
 			if (map->numbers[x][y] != 0)

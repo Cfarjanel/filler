@@ -10,19 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <execinfo.h>
-#include <signal.h>
-#include <stdlib.h>
-#include <unistd.h>
-
 #include "../includes/filler.h"
 
-static void	init(t_map *map, t_piece *piece, t_num *number)
+static void	init(t_map *map, t_piece *piece)
 {
 	ft_bzero(piece, sizeof(*piece));
 	ft_bzero(map, sizeof(*map));
-	ft_bzero(number, sizeof(*number));
 }
 
 void		ft_print_coords(t_piece *piece)
@@ -33,12 +26,11 @@ void		ft_print_coords(t_piece *piece)
 	ft_putstr("\n");
 }
 
-void	ft_exito(t_piece *piece, t_map *map)
+void		ft_exito(t_piece *piece, t_map *map)
 {
 	free_double_tab((void**)piece->shape, piece->size.x);
 	free_double_tab((void**)map->shape, map->size.x);
 	free_double_tab((void**)map->numbers, map->size.x);
-	while (1);
 	exit(1);
 }
 
@@ -54,29 +46,17 @@ void		diffusion(t_map *map, t_num *num)
 	down(map);
 }
 
-// ENLEVE MOI :)
-void handler(int sig) {
-	void *array[10];
-	size_t size;
-
-	size = backtrace(array, 10);
-	fprintf(stderr, "Error: signal %d:\n", sig);
-	backtrace_symbols_fd(array, size, STDERR_FILENO);
-	exit(1);
-}
-
 int			main(void)
 {
 	t_piece	piece;
 	t_map	map;
 	t_num	num;
 
-	// ENLEVE MOI
-	signal(SIGSEGV, handler);
-	init(&map, &piece, &num);
+	ft_bzero(&num, sizeof(num));
 	players(&num);
 	while (1)
 	{
+		init(&map, &piece);
 		piece.shape = NULL;
 		map.numbers = NULL;
 		map.shape = NULL;

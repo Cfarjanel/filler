@@ -74,7 +74,7 @@ void				left(t_map *map);
 void				down(t_map *map);
 void				diffusion(t_map *map, t_num *num);
 void				ft_print_coords(t_piece *piece);
-int         		place(t_piece *piece, t_map *map, t_num *num);
+int					place(t_piece *piece, t_map *map, t_num *num);
 
 void				ft_exito(t_piece *piece, t_map *map);
 
