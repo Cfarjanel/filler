@@ -56,10 +56,10 @@ typedef struct		s_piece
 ** parsing
 */
 
-void				size_piece(t_piece *piece);
-void				get_piece(t_piece *piece);
-void				get_map(t_map *map);
-void				size_map(t_map *map);
+void				size_piece(t_piece *piece, t_map *map);
+void				get_piece(t_piece *piece, t_map *map);
+void				get_map(t_map *map, t_piece *piece);
+void				size_map(t_map *map, t_piece *piece);
 void				players(t_num *number);
 int					ft_isplayer(t_map *m, t_num *n, int x, int y);
 int					ft_isbot(t_map *m, t_num *n, int x, int y);
@@ -75,5 +75,7 @@ void				down(t_map *map);
 void				diffusion(t_map *map, t_num *num);
 void				ft_print_coords(t_piece *piece);
 int         		place(t_piece *piece, t_map *map, t_num *num);
+
+void				ft_exito(t_piece *piece, t_map *map);
 
 #endif

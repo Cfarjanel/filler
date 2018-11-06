@@ -35,7 +35,7 @@ void		right(t_map *map, t_num *num)
 				map->numbers[x][y] = 1;
 			if (map->numbers[x][y] != 0) 
 			{
-				if (map->numbers[x][y + 1] == 0)
+				if (y + 1 < map->size.y && map->numbers[x][y + 1] == 0)
 					map->numbers[x][y + 1] = map->numbers[x][y] + 1;
 			}
 			y++;

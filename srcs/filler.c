@@ -33,6 +33,15 @@ void		ft_print_coords(t_piece *piece)
 	ft_putstr("\n");
 }
 
+void	ft_exito(t_piece *piece, t_map *map)
+{
+	free_double_tab((void**)piece->shape, piece->size.x);
+	free_double_tab((void**)map->shape, map->size.x);
+	free_double_tab((void**)map->numbers, map->size.x);
+	while (1);
+	exit(1);
+}
+
 /*
 ** Crée la map de chaleur autour de l'ennemi.
 */
@@ -68,19 +77,18 @@ int			main(void)
 	players(&num);
 	while (1)
 	{
-		size_map(&map);
-		get_map(&map);
-		size_piece(&piece);
-		get_piece(&piece);
+		piece.shape = NULL;
+		map.numbers = NULL;
+		map.shape = NULL;
+		size_map(&map, &piece);
+		get_map(&map, &piece);
+		size_piece(&piece, &map);
+		get_piece(&piece, &map);
 		diffusion(&map, &num);
 		place(&piece, &map, &num);
-		ft_putendl_fd("un", 2);
 		free_double_tab((void**)piece.shape, piece.size.x);
-		ft_putendl_fd("deux", 2);
 		free_double_tab((void**)map.shape, map.size.x);
-		ft_putendl_fd("trois", 2);
 		free_double_tab((void**)map.numbers, map.size.x);
-		ft_putendl_fd("quatre", 2);
 	}
 	return (0);
 }
