@@ -44,8 +44,8 @@ void			size_map(t_map *map, t_piece *piece)
 	i = 0;
 	line = NULL;
 	get_next_line(0, &line);
-		if (!line)
-			ft_exito(piece, map);
+	if (!line)
+		ft_exito(piece, map);
 	if (ft_strstr(line, "Plateau "))
 	{
 		while (!ft_isdigit(line[i]) && line[i])
